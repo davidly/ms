@@ -7,7 +7,7 @@ Build using your favorite version of .net:
 
 Usage
 
-    Usage: ms [-c:X] [-i] [-l] [-n] [-r] [-s:X] [-u] inputfile outputfile
+    Usage: ms [-c:X] [-i] [-l] [-n] [-r] [-s:X] [-u] [-w:X] inputfile outputfile
       My Sort
       arguments: inputfile   The file to sort. Text file with 8-bit ascii characters.
                  outputfile  The resulting sorted file. Any existing file will be obliterated.
