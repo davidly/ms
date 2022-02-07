@@ -15,7 +15,7 @@ class MySort
 {
     static void Usage()
     {
-        Console.WriteLine( "Usage: ms [-c:X] [-i] [-l] [-n] [-r] [-s:X] [-u] inputfile outputfile" );
+        Console.WriteLine( "Usage: ms [-c:X] [-i] [-l] [-n] [-r] [-s:X] [-u] [-w:X] inputfile outputfile" );
         Console.WriteLine( "  My Sort" );
         Console.WriteLine( "  arguments: inputfile   The file to sort. Text file with 8-bit ascii characters." );
         Console.WriteLine( "             outputfile  The resulting sorted file. Any existing file will be obliterated." );
