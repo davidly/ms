@@ -20,6 +20,7 @@ class MySort
         Console.WriteLine( "  arguments: inputfile   The file to sort. Text file with 8-bit ascii characters." );
         Console.WriteLine( "             outputfile  The resulting sorted file. Any existing file will be obliterated." );
         Console.WriteLine( "             -c:X        Sort starting on column X (0-based)" );
+        Console.WriteLine( "             -e          Sort from the End of the line to the start" );
         Console.WriteLine( "             -i          Ignore case when sorting strings" );
         Console.WriteLine( "             -l          Sort based on line length only" );
         Console.WriteLine( "             -n          Sort numbers, not characters" );
@@ -40,6 +41,7 @@ class MySort
     static bool s_SortOnLineLength = false;
     static bool s_SortByNumbers = false;
     static bool s_ReverseSort = false;
+    static bool s_SortFromEnd = false;
     static bool s_UniqueLines = false;
     static char s_LineSeparators = 'W';
     static byte [] s_In = null;
@@ -176,6 +178,32 @@ class MySort
                     return -1;
 
                 return 0;
+            }
+
+            if ( s_SortFromEnd )
+            {
+                StringBuilder sa = new StringBuilder();
+                while ( CharOK( a ) )
+                {
+                    sa.Append( (char) s_In[ a ] );
+                    a++;
+                }
+                StringBuilder sb = new StringBuilder();
+                while ( CharOK( b ) )
+                {
+                    sb.Append( (char) s_In[ b ] );
+                    b++;
+                }
+
+                char [] ca = sa.ToString().ToCharArray();
+                Array.Reverse( ca );
+                char [] cb = sb.ToString().ToCharArray();
+                Array.Reverse( cb );
+                string stra = new string( ca );
+                string strb = new string( cb );
+
+                int result = String.Compare( stra, strb, s_IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal );
+                return result;
             }
 
             if ( s_IgnoreCase )
@@ -330,6 +358,8 @@ class MySort
 
                     s_SortColumn = Convert.ToInt32( arg.Substring( 3 ) );
                 }
+                else if ( 'E' == c )
+                    s_SortFromEnd = true;
                 else if ( 'I' == c )
                     s_IgnoreCase = true;
                 else if ( 'L' == c )
